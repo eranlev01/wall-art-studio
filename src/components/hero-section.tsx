@@ -8,6 +8,7 @@ import {
   useTransform,
 } from "framer-motion";
 import { AnimatedHeroHeadline } from "@/components/animated-hero-headline";
+import { HeroPillBadge } from "@/components/hero-pill-badge";
 import { TextAnimate } from "@/components/ui/text-animate";
 import { ArtButton } from "@/components/ui/art-button";
 import { useMobileLayout } from "@/hooks/use-mobile-layout";
@@ -146,21 +147,7 @@ export function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: easeLuxury, delay: 0.45 }}
         >
-          <div className="hero-pill">
-            <span className="hero-dot" />
-            <TextAnimate
-              as="span"
-              by="word"
-              animation="blurInUp"
-              startOnView={false}
-              once
-              delay={0.7}
-              duration={0.4}
-              className="hero-pill-text"
-            >
-              סטודיו ציורי קיר & גרפיטי — ישראל
-            </TextAnimate>
-          </div>
+          <HeroPillBadge />
           <TextAnimate
             as="p"
             by="word"

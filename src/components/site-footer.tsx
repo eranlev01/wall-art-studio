@@ -64,26 +64,28 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="foot-col">
-          <h3 className="foot-col-title">ניווט</h3>
-          <ul className="foot-list">
-            {NAV_LINKS.map((link) => (
-              <li key={link.href}>
-                <Link href={link.href}>{link.label}</Link>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <div className="foot-links">
+          <div className="foot-col">
+            <h3 className="foot-col-title">ניווט</h3>
+            <ul className="foot-list">
+              {NAV_LINKS.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href}>{link.label}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-        <div className="foot-col">
-          <h3 className="foot-col-title">שירותים</h3>
-          <ul className="foot-list">
-            {services.map((service) => (
-              <li key={service.id}>
-                <Link href={`/services/${service.id}`}>{service.title}</Link>
-              </li>
-            ))}
-          </ul>
+          <div className="foot-col">
+            <h3 className="foot-col-title">שירותים</h3>
+            <ul className="foot-list">
+              {services.map((service) => (
+                <li key={service.id}>
+                  <Link href={`/services/${service.id}`}>{service.title}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
 
