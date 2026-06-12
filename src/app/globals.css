@@ -2171,7 +2171,7 @@
     text-align: center;
     line-height: 1.65;
     max-width: 36em;
-    padding-inline: 4px;
+    padding: 6px 4px;
   }
 
   /* ── DECORATIVE PAINT ACCENTS ── */
@@ -2363,7 +2363,7 @@
     .foot-copy {
       font-size: 12px;
       line-height: 1.7;
-      padding-inline: 8px;
+      padding: 6px 8px;
     }
     .svc-header { padding: 64px 20px 36px; }
     .svc-ed-row {
