@@ -5,9 +5,12 @@ import { motion } from "framer-motion";
 import { Reveal, Stagger, StaggerItem } from "@/components/motion/reveal";
 import { ScrollParallax } from "@/components/motion/scroll-parallax";
 import { highlightServices } from "@/data/services";
+import { useMobileLayout } from "@/hooks/use-mobile-layout";
 import { easeLuxury } from "@/lib/motion-presets";
 
 export function SprayServiceCards() {
+  const mobile = useMobileLayout();
+
   return (
     <section className="spray-services" id="solutions">
       <div className="wrap">
@@ -29,7 +32,7 @@ export function SprayServiceCards() {
               <ScrollParallax speed={index === 1 ? 0.14 : index === 0 ? 0.08 : 0.11}>
               <motion.article
                 className="spray-card"
-                whileHover={{ y: -8 }}
+                whileHover={mobile ? undefined : { y: -8 }}
                 transition={{ duration: 0.45, ease: easeLuxury }}
               >
                 <Link href={`/services/${item.id}`} className="spray-card-link">

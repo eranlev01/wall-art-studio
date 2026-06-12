@@ -10,6 +10,7 @@ import {
 import { AnimatedHeroHeadline } from "@/components/animated-hero-headline";
 import { TextAnimate } from "@/components/ui/text-animate";
 import { ArtButton } from "@/components/ui/art-button";
+import { useMobileLayout } from "@/hooks/use-mobile-layout";
 import { usePointerParallax } from "@/hooks/use-pointer-parallax";
 import { easeLuxury } from "@/lib/motion-presets";
 import { routes } from "@/lib/routes";
@@ -24,6 +25,8 @@ const WaIcon = ({ size = 16 }: { size?: number }) => (
 export function HeroSection() {
   const heroRef = useRef<HTMLElement>(null);
   const reduceMotion = useReducedMotion();
+  const mobile = useMobileLayout();
+  const motionOff = reduceMotion || mobile;
 
   const {
     bgX,
@@ -77,11 +80,11 @@ export function HeroSection() {
     <section className="hero hero-cinematic hero-parallax-root" id="hero" ref={heroRef}>
       <motion.div
         className="hero-bg-scroll-layer"
-        style={reduceMotion ? undefined : { y: bgScrollY, scale: bgScrollScale }}
+        style={motionOff ? undefined : { y: bgScrollY, scale: bgScrollScale }}
       >
         <motion.div
           className="hero-bg hero-bg-parallax"
-          style={reduceMotion ? undefined : { x: bgX, y: bgYCombined, scale: bgScale }}
+          style={motionOff ? undefined : { x: bgX, y: bgYCombined, scale: bgScale }}
         />
       </motion.div>
 
@@ -89,24 +92,24 @@ export function HeroSection() {
       <motion.div
         className="hero-grad-scroll"
         aria-hidden="true"
-        style={reduceMotion ? undefined : { opacity: gradDarken }}
+        style={motionOff ? undefined : { opacity: gradDarken }}
       />
 
       <motion.div
         className="hero-grain"
-        style={reduceMotion ? undefined : { opacity: grainOpacity }}
+        style={motionOff ? undefined : { opacity: grainOpacity }}
       />
 
       <motion.div
         className="hero-sun"
         aria-hidden="true"
-        style={reduceMotion ? undefined : { x: sunX, y: sunY }}
+        style={motionOff ? undefined : { x: sunX, y: sunY }}
       />
 
       <motion.div
         className="deco-paint deco-hero"
         aria-hidden="true"
-        style={reduceMotion ? undefined : { y: decoY }}
+        style={motionOff ? undefined : { y: decoY }}
       >
         <svg viewBox="0 0 320 250" width="320" height="250" className="deco-fill-acc" xmlns="http://www.w3.org/2000/svg">
           <path d="M320 250 L0 250 L0 162 Q82 78 164 118 Q238 152 320 48 Z" opacity=".065"/>
@@ -118,7 +121,7 @@ export function HeroSection() {
       <motion.div
         className="hero-inner wrap"
         style={
-          reduceMotion
+          motionOff
             ? undefined
             : { y: contentY, opacity: contentOpacity, scale: contentScale }
         }
@@ -183,7 +186,7 @@ export function HeroSection() {
 
       <motion.div
         className="hero-scroll"
-        style={reduceMotion ? undefined : { opacity: scrollHintOpacity }}
+        style={motionOff ? undefined : { opacity: scrollHintOpacity }}
       >
         <div className="hero-scroll-line" />
         <span>גלול</span>

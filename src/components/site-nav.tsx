@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { MobileNavMenu } from "@/components/mobile-nav-menu";
 import { NavServicesDropdown } from "@/components/nav-services-dropdown";
 import { ArtButton } from "@/components/ui/art-button";
 import { routes } from "@/lib/routes";
@@ -26,6 +27,7 @@ type SiteNavProps = {
 
 export function SiteNav({ detailNav }: SiteNavProps) {
   const shellRef = useRef<HTMLElement>(null);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => {
@@ -36,53 +38,79 @@ export function SiteNav({ detailNav }: SiteNavProps) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  return (
-    <header
-      ref={shellRef}
-      className={`nav-shell${detailNav ? " nav-shell-detail" : ""}`}
-    >
-      <div className="nav-pill">
-        <nav className="nav" id="nav">
-          <Link href={routes.home} className="nav-logo">
-            [STUDIO <em>NAME]</em>
-          </Link>
-          <ul className="nav-links">
-            <NavServicesDropdown />
-            <li><Link href={routes.portfolio}>פורטפוליו</Link></li>
-            <li><Link href={routes.about}>אודות</Link></li>
-            <li><Link href={routes.videos}>וידאו</Link></li>
-            <li><Link href={routes.contact}>צור קשר</Link></li>
-            <li><Link href={routes.themePreview} className="nav-link-themes">פלטות</Link></li>
-          </ul>
-          <ArtButton href="https://wa.me/972" variant="g" size="sm">
-            <WaIcon /> WhatsApp
-          </ArtButton>
-        </nav>
+  useEffect(() => {
+    shellRef.current?.classList.toggle("nav-menu-open", menuOpen);
+  }, [menuOpen]);
 
-        {detailNav && (
-          <div className="nav-context wrap">
-            <Link href={detailNav.section.href} className="nav-context-section">
-              {detailNav.section.label}
+  return (
+    <>
+      <header
+        ref={shellRef}
+        className={`nav-shell${detailNav ? " nav-shell-detail" : ""}`}
+      >
+        <div className="nav-pill">
+          <nav className="nav" id="nav" aria-label="ניווט ראשי">
+            <Link href={routes.home} className="nav-logo">
+              [STUDIO <em>NAME]</em>
             </Link>
-            <span className="nav-context-sep" aria-hidden="true">/</span>
-            <span className="nav-context-title">{detailNav.title}</span>
-            {(detailNav.prev || detailNav.next) && (
-              <span className="nav-context-pager">
-                {detailNav.prev && (
-                  <Link href={detailNav.prev.href} className="nav-context-step" title={detailNav.prev.label}>
-                    →
-                  </Link>
-                )}
-                {detailNav.next && (
-                  <Link href={detailNav.next.href} className="nav-context-step" title={detailNav.next.label}>
-                    ←
-                  </Link>
-                )}
-              </span>
-            )}
-          </div>
-        )}
-      </div>
-    </header>
+
+            <ul className="nav-links">
+              <NavServicesDropdown />
+              <li><Link href={routes.portfolio}>פורטפוליו</Link></li>
+              <li><Link href={routes.about}>אודות</Link></li>
+              <li><Link href={routes.videos}>וידאו</Link></li>
+              <li><Link href={routes.contact}>צור קשר</Link></li>
+              <li><Link href={routes.themePreview} className="nav-link-themes">פלטות</Link></li>
+            </ul>
+
+            <div className="nav-actions">
+              <ArtButton href="https://wa.me/972" variant="g" size="sm" className="nav-wa-desktop">
+                <WaIcon /> WhatsApp
+              </ArtButton>
+              <button
+                type="button"
+                className="nav-mobile-toggle"
+                aria-expanded={menuOpen}
+                aria-controls="mobile-nav-panel"
+                aria-label={menuOpen ? "סגירת תפריט" : "פתיחת תפריט"}
+                onClick={() => setMenuOpen((v) => !v)}
+              >
+                <span className="nav-mobile-toggle-lines" aria-hidden="true">
+                  <span />
+                  <span />
+                  <span />
+                </span>
+              </button>
+            </div>
+          </nav>
+
+          {detailNav && (
+            <div className="nav-context wrap">
+              <Link href={detailNav.section.href} className="nav-context-section">
+                {detailNav.section.label}
+              </Link>
+              <span className="nav-context-sep" aria-hidden="true">/</span>
+              <span className="nav-context-title">{detailNav.title}</span>
+              {(detailNav.prev || detailNav.next) && (
+                <span className="nav-context-pager">
+                  {detailNav.prev && (
+                    <Link href={detailNav.prev.href} className="nav-context-step" title={detailNav.prev.label}>
+                      →
+                    </Link>
+                  )}
+                  {detailNav.next && (
+                    <Link href={detailNav.next.href} className="nav-context-step" title={detailNav.next.label}>
+                      ←
+                    </Link>
+                  )}
+                </span>
+              )}
+            </div>
+          )}
+        </div>
+      </header>
+
+      <MobileNavMenu open={menuOpen} onClose={() => setMenuOpen(false)} />
+    </>
   );
 }

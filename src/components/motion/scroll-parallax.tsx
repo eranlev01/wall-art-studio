@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { useMobileLayout } from "@/hooks/use-mobile-layout";
 import { useRef, type ReactNode } from "react";
 
 type ScrollParallaxProps = {
@@ -20,6 +21,7 @@ export function ScrollParallax({
 }: ScrollParallaxProps) {
   const ref = useRef<HTMLDivElement>(null);
   const reduceMotion = useReducedMotion();
+  const mobile = useMobileLayout();
 
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -34,7 +36,7 @@ export function ScrollParallax({
     [0.5, 1, 1, 0.5]
   );
 
-  if (reduceMotion) {
+  if (reduceMotion || mobile) {
     return (
       <div ref={ref} className={className}>
         {children}

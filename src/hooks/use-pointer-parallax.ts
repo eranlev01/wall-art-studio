@@ -12,6 +12,9 @@ type ParallaxOptions = {
   fg?: number;
 };
 
+const COARSE_POINTER = "(hover: none) and (pointer: coarse)";
+const MOBILE_WIDTH = "(max-width: 900px)";
+
 export function usePointerParallax(
   ref: RefObject<HTMLElement | null>,
   options: ParallaxOptions = {}
@@ -28,6 +31,10 @@ export function usePointerParallax(
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+
+    const coarse = window.matchMedia(COARSE_POINTER);
+    const narrow = window.matchMedia(MOBILE_WIDTH);
+    if (coarse.matches || narrow.matches) return;
 
     const onMove = (e: PointerEvent) => {
       const rect = el.getBoundingClientRect();

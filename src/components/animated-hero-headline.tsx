@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion, type MotionValue } from "framer-motion";
+import { useMobileLayout } from "@/hooks/use-mobile-layout";
 import { HeroCyclingText, HeroStaticText } from "@/components/hero-cycling-text";
 
 const PAIRS = [
@@ -29,6 +30,7 @@ export function AnimatedHeroHeadline({
   fgParallax,
 }: AnimatedHeroHeadlineProps) {
   const [idx, setIdx] = useState(0);
+  const mobile = useMobileLayout();
 
   useEffect(() => {
     const t = setInterval(() => setIdx((i) => (i + 1) % PAIRS.length), 4200);
@@ -38,7 +40,7 @@ export function AnimatedHeroHeadline({
   const pair = PAIRS[idx];
 
   const rowStyle = (p?: ParallaxMotion) =>
-    p
+    p && !mobile
       ? {
           x: p.x,
           y: p.y,
