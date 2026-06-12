@@ -38,6 +38,7 @@ export default function RootLayout({
       lang="he"
       dir="rtl"
       className={`${rubik.variable} ${heebo.variable} ${graffiti.variable}`}
+      data-theme="spray-cyan"
       suppressHydrationWarning
     >
       <head>

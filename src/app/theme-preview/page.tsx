@@ -272,7 +272,7 @@ export default function ThemePreviewPage() {
               {isActiveOnSite ? "פלטה זו פעילה באתר" : "החל על האתר"}
             </ArtButton>
             <button type="button" className="tp-reset-btn" onClick={onResetDefault}>
-              איפוס לניאון רחוב (ברירת מחדל)
+              איפוס לספריי ציאן (ברירת מחדל)
             </button>
           </div>
 

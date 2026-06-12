@@ -2,10 +2,10 @@
 
 /* ── TOKENS (outside layer so they're always available) ── */
 :root {
-  --bg:#0D0D0D; --bg2:#111111; --card:#161616;
-  --acc:#E8FF00; --sec:#FF4D00; --grn:#25D366;
-  --acc-rgb: 232, 255, 0; --sec-rgb: 255, 77, 0;
-  --txt:#EBEBEB; --muted:#666; --border:rgba(255,255,255,0.07);
+  --bg:#0E1117; --bg2:#151922; --card:#1A2030;
+  --acc:#00D4E8; --sec:#FF3D9A; --grn:#25D366;
+  --acc-rgb: 0, 212, 232; --sec-rgb: 255, 61, 154;
+  --txt:#E8ECF4; --muted:#7A8499; --border:rgba(255,255,255,0.08);
   --h: var(--font-rubik, 'Rubik'), sans-serif;
   --b: var(--font-heebo, 'Heebo'), sans-serif;
   --g: var(--font-graffiti, 'Amatic SC'), cursive;

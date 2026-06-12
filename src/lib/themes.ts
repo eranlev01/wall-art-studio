@@ -410,7 +410,7 @@ export const SITE_THEMES: SiteTheme[] = [
   },
 ];
 
-export const DEFAULT_THEME_ID: ThemeId = "neon-street";
+export const DEFAULT_THEME_ID: ThemeId = "spray-cyan";
 
 export function getTheme(id: ThemeId): SiteTheme {
   return SITE_THEMES.find((t) => t.id === id) ?? SITE_THEMES[0];
