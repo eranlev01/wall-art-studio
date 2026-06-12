@@ -2101,7 +2101,13 @@
     .hero-inner { padding: 108px 0 72px; gap: 24px; width: 100%; max-width: 100%; }
     .hero-meta { max-width: 100%; padding-inline: 0; }
     .hero-sub { max-width: 100%; font-size: 15px; margin-bottom: 24px; }
-    .hero-btns { width: 100%; justify-content: center; gap: 10px; }
+    .hero-btns {
+      width: auto;
+      max-width: 100%;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
     .hero-headline { max-width: 100%; transform-style: flat; }
     .hero-headline-row {
       flex-wrap: wrap;
@@ -2307,8 +2313,17 @@
     .nav-shell.nav-scrolled .nav { padding: 10px 16px; }
     .nav-context { padding-inline: 16px; }
     .hero-inner { padding: 96px 0 64px; }
-    .hero-btns { flex-direction: column; align-items: stretch; }
-    .hero-btns .btn { width: 100%; justify-content: center; }
+    .hero-btns {
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+    .hero-btns .btn {
+      width: auto;
+      max-width: min(100%, 288px);
+      padding: 13px 24px;
+      justify-content: center;
+    }
     .hero-size-md .hero-char { font-size: clamp(28px, 9vw, 40px); }
     .hero-size-hero .hero-char { font-size: clamp(34px, 11vw, 52px); }
     .stats { grid-template-columns: 1fr; text-align: center; }
