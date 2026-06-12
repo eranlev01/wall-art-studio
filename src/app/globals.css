@@ -2076,7 +2076,7 @@
     grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
     gap: clamp(28px, 5vw, 52px);
     align-items: start;
-    padding: clamp(48px, 7vw, 72px) 0 clamp(32px, 5vw, 48px);
+    padding: clamp(48px, 7vw, 72px) 0 0;
   }
   .foot-brand {
     display: flex;
@@ -2159,15 +2159,18 @@
   }
   .foot-list a:hover { color: var(--acc); }
   .foot-bar {
-    border-top: 1px solid rgba(255, 255, 255, .06);
-    padding: 18px 0 28px;
+    border-top: 1px solid rgba(255, 255, 255, .08);
+    margin-top: clamp(32px, 5vw, 48px);
+    padding: 22px 0 32px;
   }
   .foot-copy {
     font-size: 13px;
     color: var(--muted);
-    margin: 0;
+    margin: 0 auto;
     text-align: center;
-    line-height: 1.6;
+    line-height: 1.65;
+    max-width: 36em;
+    padding-inline: 4px;
   }
 
   /* ── DECORATIVE PAINT ACCENTS ── */
@@ -2349,19 +2352,25 @@
     .port-item { border-radius: 12px 14px 10px 13px / 13px 10px 14px 12px; }
     .foot-grid {
       grid-template-columns: 1fr;
-      gap: 36px;
-      padding-bottom: 28px;
+      gap: 32px;
+      padding-top: clamp(40px, 10vw, 56px);
     }
     .foot-brand { max-width: none; }
     .foot-links {
       grid-template-columns: 1fr 1fr;
-      gap: 28px 24px;
-    }
-    .site-footer {
-      padding-bottom: calc(96px + env(safe-area-inset-bottom, 0));
+      gap: 28px 20px;
     }
     .foot-bar {
-      padding: 16px 0 calc(20px + env(safe-area-inset-bottom, 0));
+      margin-top: 28px;
+      padding: 26px 0 calc(28px + env(safe-area-inset-bottom, 0));
+    }
+    .foot-copy {
+      font-size: 12px;
+      line-height: 1.7;
+      padding-inline: 8px;
+    }
+    .site-footer {
+      padding-bottom: calc(108px + env(safe-area-inset-bottom, 0));
     }
     .svc-header { padding: 64px 20px 36px; }
     .svc-ed-row {
@@ -2443,6 +2452,10 @@
     }
     .foot-links { grid-template-columns: 1fr; gap: 28px; }
     .foot-social { flex-wrap: wrap; }
+    .foot-bar {
+      margin-top: 24px;
+      padding: 24px 0 calc(32px + env(safe-area-inset-bottom, 0));
+    }
     .float-badge { bottom: 16px; left: 16px; }
     .top-btn { bottom: 16px; right: 16px; }
     .vid-fan { padding-inline: 36px; }
