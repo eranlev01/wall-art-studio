@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   FacebookIcon,
@@ -35,6 +35,12 @@ type MobileNavMenuProps = {
 };
 
 export function MobileNavMenu({ open, onClose }: MobileNavMenuProps) {
+  const [servicesOpen, setServicesOpen] = useState(false);
+
+  useEffect(() => {
+    if (!open) setServicesOpen(false);
+  }, [open]);
+
   useEffect(() => {
     if (!open) return;
     const prev = document.body.style.overflow;
@@ -92,35 +98,53 @@ export function MobileNavMenu({ open, onClose }: MobileNavMenuProps) {
               </header>
 
               <nav className="mobile-nav-body">
-                <section className="mobile-nav-group" aria-labelledby="mobile-nav-services-label">
-                  <h2 id="mobile-nav-services-label" className="mobile-nav-group-title">
-                    שירותים
-                  </h2>
-                  <ul className="mobile-nav-subs">
-                    {services.map((service) => (
-                      <li key={service.id}>
-                        <Link
-                          href={`/services/${service.id}`}
-                          className="mobile-nav-sub-link"
-                          onClick={onClose}
-                        >
-                          <span className="mobile-nav-sub-num">{service.num}</span>
-                          <span className="mobile-nav-sub-text">{service.title}</span>
-                          <span className="mobile-nav-sub-bar" aria-hidden="true" />
-                        </Link>
-                      </li>
-                    ))}
-                    <li>
-                      <Link
-                        href={routes.solutions}
-                        className="mobile-nav-sub-link mobile-nav-sub-link-all"
-                        onClick={onClose}
+                <section className="mobile-nav-group">
+                  <button
+                    type="button"
+                    className={`mobile-nav-group-toggle${servicesOpen ? " open" : ""}`}
+                    aria-expanded={servicesOpen}
+                    aria-controls="mobile-nav-services-list"
+                    onClick={() => setServicesOpen((v) => !v)}
+                  >
+                    <span className="mobile-nav-group-title">שירותים</span>
+                    <span className="mobile-nav-chevron" aria-hidden="true" />
+                  </button>
+                  <AnimatePresence initial={false}>
+                    {servicesOpen && (
+                      <motion.ul
+                        id="mobile-nav-services-list"
+                        className="mobile-nav-subs"
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
                       >
-                        <span className="mobile-nav-sub-text">כל השירותים</span>
-                        <span className="mobile-nav-sub-bar" aria-hidden="true" />
-                      </Link>
-                    </li>
-                  </ul>
+                        {services.map((service) => (
+                          <li key={service.id}>
+                            <Link
+                              href={`/services/${service.id}`}
+                              className="mobile-nav-sub-link"
+                              onClick={onClose}
+                            >
+                              <span className="mobile-nav-sub-num">{service.num}</span>
+                              <span className="mobile-nav-sub-text">{service.title}</span>
+                              <span className="mobile-nav-sub-bar" aria-hidden="true" />
+                            </Link>
+                          </li>
+                        ))}
+                        <li>
+                          <Link
+                            href={routes.solutions}
+                            className="mobile-nav-sub-link mobile-nav-sub-link-all"
+                            onClick={onClose}
+                          >
+                            <span className="mobile-nav-sub-text">כל השירותים</span>
+                            <span className="mobile-nav-sub-bar" aria-hidden="true" />
+                          </Link>
+                        </li>
+                      </motion.ul>
+                    )}
+                  </AnimatePresence>
                 </section>
 
                 <ul className="mobile-nav-primary">
